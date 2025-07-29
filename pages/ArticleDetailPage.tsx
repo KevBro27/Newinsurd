@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getArticleBySlug } from '../../data/articles';
+import { getArticleBySlug } from '../data/articles';
 import ArticleLayout from '../components/ArticleLayout';
 
 const ArticleDetailPage: React.FC = () => {
