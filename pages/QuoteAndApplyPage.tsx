@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import TrustedCarriers from '../components/TrustedCarriers';
 
@@ -10,7 +9,7 @@ const QuoteAndApplyPage: React.FC = () => {
     document.querySelector('meta[property="og:description"]')?.setAttribute('content', newDescription);
     document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', newDescription);
 
-    // Check if the script is already on the page to avoid duplicates during development hot-reloads
+    // Check if the script is already on the page to avoid duplicates
     if (document.getElementById('strife')) {
         return;
     }
@@ -30,13 +29,12 @@ const QuoteAndApplyPage: React.FC = () => {
       if (strifeScript) {
         document.body.removeChild(strifeScript);
       }
-      // The widget might leave content behind, so we clear the container on unmount.
       const container = document.getElementById('container-id');
       if (container) {
           container.innerHTML = '';
       }
     };
-  }, []); // Empty dependency array ensures this effect runs only once on mount and cleans up on unmount
+  }, []); // Empty dependency array ensures this runs only once
 
   return (
     <div className="bg-white py-16 md:py-24">
@@ -53,16 +51,16 @@ const QuoteAndApplyPage: React.FC = () => {
             <TrustedCarriers />
           </div>
 
+          {/* --- THIS IS THE CORRECTED CONTAINER --- */}
           <div 
             id="container-id" 
-            className="max-w-4xl w-full mx-auto bg-gray-50 p-4 rounded-xl border-2 border-brand-gold transition-all duration-300"
+            className="max-w-4xl w-full mx-auto bg-gray-50 p-4 rounded-xl border-2 border-brand-gold transition-all duration-300 flex justify-center items-center min-h-[600px]"
             style={{ 
-              minHeight: '800px',
               boxShadow: '0 0 30px rgba(251, 191, 36, 0.2)'
             }}
           >
              {/* This placeholder content will be replaced by the Strife widget once it loads. */}
-             <div className="flex flex-col items-center justify-center h-full min-h-[750px]">
+             <div className="flex flex-col items-center justify-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-brand-gold"></div>
                 <p className="mt-4 text-brand-navy font-semibold">Loading secure quoter...</p>
              </div>
