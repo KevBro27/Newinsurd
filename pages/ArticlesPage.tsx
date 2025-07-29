@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { articles } from '../../data/articles';
+import { articles } from '../data/articles';
 
 const BookIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
