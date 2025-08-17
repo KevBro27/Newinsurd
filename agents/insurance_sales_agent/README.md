@@ -2,30 +2,16 @@
 
 This project contains a full-stack AI-powered sales agent designed to be embedded on a website. It educates visitors about life insurance, guides them toward instant-apply tools, and captures their information as a fallback lead.
 
+The agent consists of two main parts:
+1.  A **Python FastAPI backend** that handles all core logic, LLM interaction, and serves the widget.
+2.  A **self-contained JavaScript widget** that can be embedded on any website.
+
 ## Project Structure
 
--   `/backend`: Contains the Python FastAPI application that handles all core logic.
--   `/frontend`: Contains the React + Vite + Tailwind CSS project for the embeddable chat widget.
+-   `/backend`: Contains the Python FastAPI application.
+    -   `/backend/static/widget.js`: The embeddable JavaScript widget.
 -   `docker-compose.yml`: Orchestrates the local development environment.
 -   `.env.example`: An example file for the required environment variables.
-
-## Core Features
-
-### Backend
--   **FastAPI Server**: Provides a robust API for the frontend.
--   **Configurable LLM**: Can use Ollama (default) or OpenAI based on the `AI_MODEL` environment variable.
--   **Sales Funnel Logic**:
-    1.  Prompts users to apply via an instant-decision tool (`ETHOS_URL`).
-    2.  If the user declines, it offers a second tool (`BACKNINE_URL`).
-    3.  If the user still declines or asks for a human, it captures their contact information.
--   **Endpoints**:
-    -   `POST /chat`: Main conversational endpoint.
-    -   `POST /lead`: Endpoint to capture user information and send an email notification.
-
-### Frontend
--   **React Widget**: A modern, embeddable chat interface.
--   **Dynamic Buttons**: "Apply Now" buttons are dynamically shown based on the backend response.
--   **Lead Capture Form**: A simple form to collect user details when the fallback flow is triggered.
 
 ## Getting Started (Local Development)
 
@@ -45,8 +31,8 @@ cp .env.example .env
 
 Now, open the `.env` file and fill in your actual values for:
 -   `EMAIL_RECEIVE`
--   `AI_MODEL` (if you want to switch to `openai`)
--   `OLLAMA_HOST` (if your Ollama instance is not at the default location)
+-   `AI_MODEL` (e.g., `ollama` or `openai`)
+-   `OLLAMA_HOST` (if using `docker-compose`, the default `http://host.docker.internal:11434` should work for connecting to Ollama running on your host machine)
 -   `OPENAI_API_KEY` (if using OpenAI)
 -   `SENDGRID_API_KEY`
 
@@ -58,21 +44,28 @@ With Docker running, execute the following command from this directory (`/agents
 docker-compose up --build
 ```
 
-This command will:
-1.  Build the Docker images for both the `backend` and `frontend` services.
-2.  Start both services.
+This command will build and start the FastAPI backend service.
 
 You can now access:
--   **Frontend Widget**: `http://localhost:5173`
 -   **Backend API Docs**: `http://localhost:8000/docs`
+-   **The Widget JavaScript File**: `http://localhost:8000/static/widget.js`
 
 ### 3. Embedding the Widget
 
-To embed the widget on your main website in a development environment, you can use a script tag pointing to the Vite dev server's entry point.
+To use the widget, add the following snippet to your website's HTML, just before the closing `</body>` tag.
 
 ```html
-<div id="root"></div>
-<script type="module" src="http://localhost:5173/src/main.tsx"></script>
+<!-- AI Insurance Sales Agent Widget -->
+<script>
+  (function() {
+    // IMPORTANT: In production, change this to your deployed agent's URL
+    const WIDGET_URL = "http://localhost:8000/static/widget.js";
+    const script = document.createElement("script");
+    script.src = WIDGET_URL;
+    script.async = true;
+    document.body.appendChild(script);
+  })();
+</script>
 ```
 
-For production, you would build the frontend into a static bundle and serve it.
+You will also need to edit the `widget.js` file itself to set the `API_BASE` variable to point to your deployed backend URL.
