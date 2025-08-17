@@ -1,0 +1,16 @@
+# FastAPI
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Pydantic for data validation
+pydantic==2.7.1
+
+# For making HTTP requests to LLM APIs
+requests==2.32.3
+openai==1.30.1 # For OpenAI API compatibility
+
+# For sending emails
+sendgrid==6.11.0
+
+# For loading environment variables
+python-dotenv==1.0.1
