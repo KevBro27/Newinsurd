@@ -1,6 +1,9 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "build": "cd packages/frontend && npm install && npm run build"
+  },
   "workspaces": [
     "packages/*"
   ]
