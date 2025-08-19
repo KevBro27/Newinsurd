@@ -1,0 +1,39 @@
+name: Deploy GROWTH (Cloud Run)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "agents/growth/**"
+      - "agents/shared/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Auth to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy to Cloud Run (source)
+        run: |
+          gcloud run deploy growth-agent \
+            --source ./agents/growth \
+            --region ${{ secrets.GCP_REGION }} \
+            --allow-unauthenticated \
+            --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \
+            --set-env-vars=ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }},GCS_BUCKET_NAME=${{ secrets.GCS_BUCKET_NAME }},GCS_UPLOAD_PREFIX=${{ secrets.GCS_UPLOAD_PREFIX }},GROWTH_AGENT_TEMPLATE_ID=${{ secrets.GROWTH_AGENT_TEMPLATE_ID }},YOUR_EMAIL=${{ secrets.YOUR_EMAIL }},GUNICORN_CMD_ARGS="--timeout 120 --graceful-timeout 120 --workers 1 --threads 8" \
+            --set-secrets=SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest \
+            --memory=1Gi
