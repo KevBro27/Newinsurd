@@ -40,6 +40,9 @@ jobs:
           OLLAMA_HOST: "${{ secrets.OLLAMA_HOST }}"
           EOF
 
+      - name: List files for debugging
+        run: ls -lR ./deploy_source
+
       - name: Deploy to Cloud Run (source)
         run: |
           gcloud run deploy insurance-sales-agent \
