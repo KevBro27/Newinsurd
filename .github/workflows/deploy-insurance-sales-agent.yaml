@@ -47,6 +47,6 @@ jobs:
             --region ${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
             --service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} \
-            --env-vars-file=env.yaml \
+            --env-vars-file=./deploy_source/insurance-sales-agent/env.yaml \
             --set-secrets=OPENAI_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/OPENAI_API_KEY:latest,SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest \
             --memory=1Gi
