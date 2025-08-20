@@ -51,4 +51,5 @@ jobs:
             --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \
             --env-vars-file=./deploy_source/oracle/env.yaml \
             --set-secrets=SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest \
-            --memory=1Gi
+            --memory=1Gi \
+            --clear-base-image
