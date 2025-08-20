@@ -34,6 +34,6 @@ jobs:
             --region ${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
             --service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} \
-            --set-env-vars=ETHOS_URL=${{ secrets.ETHOS_URL }},BACKNINE_URL=${{ secrets.BACKNINE_URL }},EMAIL_RECEIVE=${{ secrets.EMAIL_RECEIVE }},AI_MODEL=${{ secrets.AI_MODEL }},OLLAMA_HOST=${{ secrets.OLLAMA_HOST }} \
+            --set-env-vars="ETHOS_URL=${{ secrets.ETHOS_URL }},BACKNINE_URL=${{ secrets.BACKNINE_URL }},EMAIL_RECEIVE=${{ secrets.EMAIL_RECEIVE }},AI_MODEL=${{ secrets.AI_MODEL }},OLLAMA_HOST=${{ secrets.OLLAMA_HOST }}" \
             --set-secrets=OPENAI_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/OPENAI_API_KEY:latest,SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest \
             --memory=1Gi
