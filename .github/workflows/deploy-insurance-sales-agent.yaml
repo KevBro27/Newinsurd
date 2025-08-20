@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
     paths:
       - "agents/insurance_sales_agent/**"
+      - "agents/shared/**"
 
 jobs:
   deploy:

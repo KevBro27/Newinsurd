@@ -1,7 +1,8 @@
 import os
 import uuid
-from datetime import timedelta
 from flask import Flask, request, jsonify
+from shared.gcp import gcs_upload_and_sign, make_docs_client, make_drive_client
+from shared.email import send_email
 
 app = Flask(__name__)
 
@@ -17,36 +18,7 @@ def add_cors_headers(resp):
     return resp
 
 
-# ---- Helpers: GCS upload, Docs templating, Email ----
-def upload_to_gcs_and_sign(file_bytes: bytes, filename: str, content_type: str) -> dict:
-    from google.cloud import storage
-    bucket_name = os.environ["GCS_BUCKET_NAME"]
-    folder = os.environ.get("GCS_UPLOAD_PREFIX", "uploads")
-
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-
-    safe_name = f"{uuid.uuid4()}_{filename or 'upload'}"
-    blob_path = f"{folder}/{safe_name}"
-    blob = bucket.blob(blob_path)
-
-    blob.upload_from_string(file_bytes, content_type=content_type)
-    # Signed URL valid 7 days
-    url = blob.generate_signed_url(expiration=timedelta(days=7), method="GET")
-    return {"gs_path": f"gs://{bucket_name}/{blob_path}", "signed_url": url}
-
-
-def make_docs_clients():
-    import google.auth
-    from googleapiclient.discovery import build
-    scopes = [
-        "https://www.googleapis.com/auth/drive",
-        "https://www.googleapis.com/auth/documents",
-    ]
-    creds, _ = google.auth.default(scopes=scopes)
-    docs = build("docs", "v1", credentials=creds)
-    drive = build("drive", "v3", credentials=creds)
-    return docs, drive
+# ---- Helpers: Docs templating ----
 
 
 def create_report_from_template(client_name: str, policy_snippet: str, file_url: str) -> str:
@@ -56,7 +28,8 @@ def create_report_from_template(client_name: str, policy_snippet: str, file_url:
     Returns: new Google Doc URL
     """
     template_id = os.environ["AUDIT_TEMPLATE_ID"]
-    docs, drive = make_docs_clients()
+    docs = make_docs_client()
+    drive = make_drive_client()
 
     title = f"Policy Audit — {client_name or 'Client'} — {uuid.uuid4().hex[:6]}"
     copied = drive.files().copy(fileId=template_id, body={"name": title}).execute()
@@ -88,22 +61,6 @@ def create_report_from_template(client_name: str, policy_snippet: str, file_url:
     return f"https://docs.google.com/document/d/{new_doc_id}/edit"
 
 
-def send_email(subject: str, content: str):
-    from sendgrid import SendGridAPIClient
-    from sendgrid.helpers.mail import Mail
-    sg_key = os.environ.get("SENDGRID_API_KEY")
-    to_email = os.environ.get("YOUR_EMAIL")
-    if not sg_key or not to_email:
-        print("WARN: SENDGRID_API_KEY or YOUR_EMAIL not set; skipping email.")
-        return
-    msg = Mail(from_email=to_email, to_emails=to_email, subject=subject, plain_text_content=content)
-    try:
-        sg = SendGridAPIClient(sg_key)
-        sg.send(msg)
-    except Exception as e:
-        print("SendGrid error:", e)
-
-
 # ---- MAIN ENDPOINTS ----
 @app.route("/webhook/policy-audit", methods=["POST", "OPTIONS"])
 def handle_policy_audit():
@@ -133,7 +90,7 @@ def handle_policy_audit():
         print(f"Received '{filename}' ({content_type}), size={size} bytes for {client_name} <{client_email}>")
 
         # 1) Save original to GCS and get signed URL
-        gcs_info = upload_to_gcs_and_sign(file_bytes, filename, content_type)
+        gcs_info = gcs_upload_and_sign(file_bytes, filename, content_type)
         signed_url = gcs_info["signed_url"]
 
         # 2) Extract text if PDF
@@ -150,9 +107,11 @@ def handle_policy_audit():
         report_url = create_report_from_template(client_name, snippet, signed_url)
 
         # 4) Email results
+        email_to = os.environ.get("YOUR_EMAIL")
         send_email(
             subject=f"New Policy Audit: {client_name}",
             content=f"Client: {client_name} <{client_email}>\nFile: {signed_url}\nReport: {report_url}",
+            to_email=email_to
         )
 
         return jsonify({

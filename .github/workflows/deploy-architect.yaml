@@ -27,10 +27,16 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Prepare source for deployment
+        run: |
+          mkdir -p ./deploy_source/architect
+          cp -r ./agents/architect/* ./deploy_source/architect/
+          cp -r ./agents/shared ./deploy_source/architect/
+
       - name: Deploy to Cloud Run (source)
         run: |
           gcloud run deploy architect-agent \
-            --source ./agents/architect \
+            --source ./deploy_source/architect \
             --region ${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
             --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \
