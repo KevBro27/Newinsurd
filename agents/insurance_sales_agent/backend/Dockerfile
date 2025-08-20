@@ -11,7 +11,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the shared code into the container
-COPY ../../shared /app/shared
+COPY shared /app/shared
 
 # Copy the rest of the backend application code into the container
 COPY . .
