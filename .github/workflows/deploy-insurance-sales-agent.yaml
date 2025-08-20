@@ -27,14 +27,26 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Prepare source for deployment
+        run: |
+          mkdir -p ./deploy_source/insurance-sales-agent
+          cp -r ./agents/insurance_sales_agent/backend/* ./deploy_source/insurance-sales-agent/
+          cp -r ./agents/shared ./deploy_source/insurance-sales-agent/
+          cat <<EOF > ./deploy_source/insurance-sales-agent/env.yaml
+          ETHOS_URL: "${{ secrets.ETHOS_URL }}"
+          BACKNINE_URL: "${{ secrets.BACKNINE_URL }}"
+          EMAIL_RECEIVE: "${{ secrets.EMAIL_RECEIVE }}"
+          AI_MODEL: "${{ secrets.AI_MODEL }}"
+          OLLAMA_HOST: "${{ secrets.OLLAMA_HOST }}"
+          EOF
+
       - name: Deploy to Cloud Run (source)
         run: |
           gcloud run deploy insurance-sales-agent \
-            --source ./agents/insurance_sales_agent/backend \
+            --source ./deploy_source/insurance-sales-agent \
             --region ${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
             --service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} \
-            --env-vars-delimiter="^:^" \
-            --set-env-vars="ETHOS_URL=${{ secrets.ETHOS_URL }}^:^BACKNINE_URL=${{ secrets.BACKNINE_URL }}^:^EMAIL_RECEIVE=${{ secrets.EMAIL_RECEIVE }}^:^AI_MODEL=${{ secrets.AI_MODEL }}^:^OLLAMA_HOST=${{ secrets.OLLAMA_HOST }}" \
+            --env-vars-file=env.yaml \
             --set-secrets=OPENAI_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/OPENAI_API_KEY:latest,SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest \
             --memory=1Gi
