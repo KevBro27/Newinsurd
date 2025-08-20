@@ -32,6 +32,11 @@ jobs:
           mkdir -p ./deploy_source/architect
           cp -r ./agents/architect/* ./deploy_source/architect/
           cp -r ./agents/shared ./deploy_source/architect/
+          cat <<EOF > ./deploy_source/architect/env.yaml
+          ALLOWED_ORIGIN: "${{ secrets.ALLOWED_ORIGIN }}"
+          YOUR_EMAIL: "${{ secrets.YOUR_EMAIL }}"
+          GITHUB_REPOSITORY: "${{ github.repository }}"
+          EOF
 
       - name: Deploy to Cloud Run (source)
         run: |
@@ -41,6 +46,6 @@ jobs:
             --allow-unauthenticated \
             --service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} \
             --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \
-            --set-env-vars=ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }},YOUR_EMAIL=${{ secrets.YOUR_EMAIL }},GITHUB_REPOSITORY=${{ github.repository }} \
+            --env-vars-file=./deploy_source/architect/env.yaml \
             --set-secrets=SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest,GITHUB_TOKEN=projects/${{ secrets.GCP_PROJECT }}/secrets/GH_TOKEN:latest \
             --memory=1Gi

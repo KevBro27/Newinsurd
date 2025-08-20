@@ -33,6 +33,10 @@ jobs:
           mkdir -p ./deploy_source/aegis
           cp -r ./agents/aegis/* ./deploy_source/aegis/
           cp -r ./agents/shared ./deploy_source/aegis/
+          cat <<EOF > ./deploy_source/aegis/env.yaml
+          ALLOWED_ORIGIN: "${{ secrets.ALLOWED_ORIGIN }}"
+          YOUR_EMAIL: "${{ secrets.YOUR_EMAIL }}"
+          EOF
 
       - name: Deploy to Cloud Run (source)
         run: |
@@ -42,6 +46,6 @@ jobs:
             --allow-unauthenticated \
             --service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} \
             --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \
-            --set-env-vars=ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }},YOUR_EMAIL=${{ secrets.YOUR_EMAIL }} \
+            --env-vars-file=./deploy_source/aegis/env.yaml \
             --set-secrets=SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest,BACKNINE_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/BACKNINE_API_KEY:latest \
             --memory=1Gi
