@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
     paths:
       - "agents/oracle/**"
+      - "agents/shared/**"
 
 jobs:
   deploy:
@@ -26,10 +27,16 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Prepare source for deployment
+        run: |
+          mkdir -p ./deploy_source/oracle
+          cp -r ./agents/oracle/* ./deploy_source/oracle/
+          cp -r ./agents/shared ./deploy_source/oracle/
+
       - name: Deploy to Cloud Run (source)
         run: |
           gcloud run deploy oracle-agent \
-            --source ./agents/oracle \
+            --source ./deploy_source/oracle \
             --region ${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
             --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \

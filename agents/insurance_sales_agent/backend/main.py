@@ -5,14 +5,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr, Field
 from dotenv import load_dotenv
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-import openai
 from typing import List, Optional
-
-# --- Load Environment Variables ---
-# Assumes .env file is in the parent directory agents/insurance_sales_agent/
-load_dotenv("../.env")
+import openai
+from shared.email import send_email
 
 # --- FastAPI App Initialization ---
 app = FastAPI(
@@ -114,23 +109,6 @@ def get_llm_response(message: str, history: list[dict]) -> dict:
     return {"reply": content, "next_actions": {"apply_url": None}}
 
 
-def send_lead_email(lead: LeadRequest):
-    """Sends the captured lead details via SendGrid."""
-    if not SENDGRID_API_KEY or not EMAIL_RECEIVE:
-        print("WARN: SENDGRID_API_KEY or EMAIL_RECEIVE not set. Skipping email.")
-        return
-
-    subject = f"New Website Lead: {lead.name}"
-    body = f"A new lead was captured via the website chatbot.\n\nConversation ID: {lead.conversation_id}\nName: {lead.name}\nEmail: {lead.email}\nPhone: {lead.phone or 'Not provided'}"
-
-    message = Mail(from_email=EMAIL_RECEIVE, to_emails=EMAIL_RECEIVE, subject=subject, plain_text_content=body)
-    try:
-        sg = SendGridAPIClient(SENDGRID_API_KEY)
-        sg.send(message)
-    except Exception as e:
-        print(f"Error sending email via SendGrid: {e}")
-        pass
-
 # --- API Endpoints ---
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
@@ -147,7 +125,9 @@ async def chat(request: ChatRequest):
 async def capture_lead(request: LeadRequest):
     """Captures lead info and sends it via email."""
     try:
-        send_lead_email(request)
+        subject = f"New Website Lead: {request.name}"
+        body = f"A new lead was captured via the website chatbot.\n\nConversation ID: {request.conversation_id}\nName: {request.name}\nEmail: {request.email}\nPhone: {request.phone or 'Not provided'}"
+        send_email(subject=subject, content=body, to_email=EMAIL_RECEIVE)
         return {"status": "ok", "message": "Lead captured successfully."}
     except Exception as e:
         print(f"Error in /lead endpoint: {e}")

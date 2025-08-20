@@ -28,10 +28,16 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT }}
 
+      - name: Prepare source for deployment
+        run: |
+          mkdir -p ./deploy_source/aegis
+          cp -r ./agents/aegis/* ./deploy_source/aegis/
+          cp -r ./agents/shared ./deploy_source/aegis/
+
       - name: Deploy to Cloud Run (source)
         run: |
           gcloud run deploy aegis-agent \
-            --source ./agents/aegis \
+            --source ./deploy_source/aegis \
             --region ${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
             --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \

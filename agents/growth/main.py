@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request, jsonify
-from agents.shared import log, new_request_id, draft_text, make_docs_client, make_drive_client, send_email
+from shared import log, new_request_id, draft_text, make_docs_client, make_drive_client, send_email
 
 app = Flask(__name__)
 
