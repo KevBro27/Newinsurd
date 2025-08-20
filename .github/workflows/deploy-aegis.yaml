@@ -40,6 +40,7 @@ jobs:
             --source ./deploy_source/aegis \
             --region ${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
+            --service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} \
             --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \
             --set-env-vars=ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }},YOUR_EMAIL=${{ secrets.YOUR_EMAIL }} \
             --set-secrets=SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest,BACKNINE_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/BACKNINE_API_KEY:latest \

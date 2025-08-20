@@ -39,6 +39,7 @@ jobs:
             --source ./deploy_source/oracle \
             --region ${{ secrets.GCP_REGION }} \
             --allow-unauthenticated \
+            --service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} \
             --set-build-env-vars=BP_PYTHON_VERSION=3.11.9 \
             --set-env-vars=ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }},GCS_BUCKET_NAME=${{ secrets.GCS_BUCKET_NAME }},GCS_UPLOAD_PREFIX=${{ secrets.GCS_UPLOAD_PREFIX }},AUDIT_TEMPLATE_ID=${{ secrets.AUDIT_TEMPLATE_ID }},YOUR_EMAIL=${{ secrets.YOUR_EMAIL }},GUNICORN_CMD_ARGS="--timeout 120 --graceful-timeout 120 --workers 1 --threads 8" \
             --set-secrets=SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest \
