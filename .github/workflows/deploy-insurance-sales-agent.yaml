@@ -53,3 +53,5 @@ jobs:
             --env-vars-file=./deploy_source/insurance-sales-agent/env.yaml \
             --set-secrets=OPENAI_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/OPENAI_API_KEY:latest,SENDGRID_API_KEY=projects/${{ secrets.GCP_PROJECT }}/secrets/SENDGRID_API_KEY:latest \
             --memory=1Gi
+
+# Force new workflow run to pick up latest changes
