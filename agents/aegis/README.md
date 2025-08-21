@@ -14,4 +14,4 @@ This agent is responsible for client retention and business intelligence.
 -   `GET /healthz`: A health check endpoint for Cloud Run.
 
 ## Deployment
-This agent is deployed as a containerized service on Google Cloud Run. The deployment is automated via a GitHub Actions workflow. The workflow is triggered by pushes to the `main` branch that include changes in the `agents/aegis/` or `agents/shared/` directories.
+This agent is deployed as a containerized service on Google Cloud Run. The deployment is automated via a GitHub Actions workflow. The workflow is triggered by pushes to the `main` branch that include changes in the `agents/aegis/` or `agents/shared/` directories. 
