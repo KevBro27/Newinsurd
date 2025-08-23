@@ -19,6 +19,10 @@ const SendIcon = () => (
     </svg>
 );
 
+function linkify(text: string) {
+  const urlRegex = /(https?:\/\/[^\s<]+)/g;
+  return text.replace(urlRegex, (u) => `<a href="${u}" class="underline" target="_blank" rel="noopener noreferrer">${u}</a>`);
+}
 
 const Chatbot: React.FC<{ className?: string }> = ({ className }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -107,19 +111,28 @@ const Chatbot: React.FC<{ className?: string }> = ({ className }) => {
                     </div>
 
                     {/* Messages */}
-                    <div ref={chatboxRef} className="flex-1 p-4 overflow-y-auto bg-gray-50">
-                        {messages.map((msg, index) => (
-                            <div key={index} className={`my-2 p-3 rounded-lg max-w-[85%] ${
-                                msg.role === 'user'
-                                ? 'bg-brand-gold text-brand-navy ml-auto'
-                                : 'bg-gray-200 text-brand-body-text mr-auto'
-                            }`}>
-                                {msg.content}
+                    <div ref={chatboxRef} className="flex-1 p-4 space-y-3 overflow-y-auto overflow-x-hidden bg-gray-50">
+                        {messages.map((m, index) => (
+                            <div key={index} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                <div
+                                  className={`chat-bubble inline-block px-3 py-2 rounded-2xl ${
+                                    m.role === "user"
+                                      ? "bg-[#FBBF24] text-black"
+                                      : "bg-gray-100 text-gray-900"
+                                  } whitespace-pre-wrap break-words overflow-hidden max-w-[85%]`}
+                                >
+                                  <span
+                                    className="break-words"
+                                    dangerouslySetInnerHTML={{ __html: linkify(m.content).replace(/\n/g, "<br/>") }}
+                                  />
+                                </div>
                             </div>
                         ))}
                         {isLoading && (
-                             <div className="my-2 p-3 rounded-lg max-w-[85%] bg-gray-200 text-brand-body-text mr-auto">
-                                ...
+                            <div className="flex justify-start">
+                                 <div className="chat-bubble inline-block px-3 py-2 rounded-2xl bg-gray-100 text-gray-900">
+                                    ...
+                                </div>
                             </div>
                         )}
                     </div>
