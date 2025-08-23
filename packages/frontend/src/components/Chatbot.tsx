@@ -29,8 +29,56 @@ const Chatbot: React.FC<{ className?: string }> = ({ className }) => {
     const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
     const chatboxRef = useRef<HTMLDivElement>(null);
+
+    const quicks = [
+      { label: "What is life insurance?", text: "What is life insurance?" },
+      { label: "Term vs Whole", text: "Term vs whole life?" },
+      { label: "How much do I need?", text: "How much life insurance do I need?" },
+      { label: "Ethos", text: "What is Ethos?" },
+    ];
+
+    const doSendMessage = async (text: string) => {
+        if (isLoading || !text.trim()) return;
+
+        const currentHistory = [...messages];
+        const userMessage = { role: 'user' as const, content: text };
+
+        setMessages(prev => [...prev, userMessage]);
+        setIsLoading(true);
+
+        try {
+            const response = await fetch('/.netlify/functions/strategic-advisor', {
+                method: 'POST',
+                body: JSON.stringify({
+                    history: currentHistory,
+                    user: text,
+                }),
+            });
+
+            if (!response.ok) {
+              const errorText = await response.text();
+              throw new Error(`Network error: ${response.status} ${errorText}`);
+            }
+
+            const data = await response.json();
+            const botReply = data.reply || "Sorry, I'm having trouble connecting. Please try again later.";
+
+            setMessages(prev => [...prev, { role: 'assistant', content: botReply }]);
+
+        } catch (error) {
+            console.error('Error fetching chat response:', error);
+            setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, something went wrong. Please try again." }]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleFormSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        doSendMessage(userInput);
+        setUserInput('');
+    };
 
     useEffect(() => {
         // Scroll to bottom of chatbox on new message
@@ -50,43 +98,6 @@ const Chatbot: React.FC<{ className?: string }> = ({ className }) => {
             }, 500);
         }
     }, [messages, isOpen, isLoading]);
-
-    const handleSendMessage = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!userInput.trim() || isLoading) return;
-
-        const userMessageContent = userInput;
-        const currentMessages = [...messages, { role: 'user' as const, content: userMessageContent }];
-
-        setMessages(currentMessages);
-        setUserInput('');
-        setIsLoading(true);
-
-        try {
-            const response = await fetch('/.netlify/functions/strategic-advisor', {
-                method: 'POST',
-                body: JSON.stringify({
-                    history: messages,
-                    user: userMessageContent,
-                }),
-            });
-
-            if (!response.ok) {
-              const errorText = await response.text();
-              throw new Error(`Network error: ${response.status} ${errorText}`);
-            }
-
-            const data = await response.json();
-            const botReply = data.reply || "Sorry, I'm having trouble connecting. Please try again later.";
-
-            setMessages(prev => [...prev, { role: 'assistant', content: botReply }]);
-        } catch (error) {
-            console.error('Error fetching chat response:', error);
-            setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, something went wrong. Please try again." }]);
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     return (
         <div className={`relative ${className}`}>
@@ -137,9 +148,25 @@ const Chatbot: React.FC<{ className?: string }> = ({ className }) => {
                         )}
                     </div>
 
+                    {/* Quick Chips */}
+                    <div className="p-2 border-t border-gray-200 bg-white">
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {messages.length <= 1 && quicks.map((q, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => doSendMessage(q.text)}
+                                    className="px-3 py-1 bg-gray-100 text-sm text-brand-navy rounded-full hover:bg-gray-200"
+                                    disabled={isLoading}
+                                >
+                                    {q.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Input */}
                     <div className="p-4 border-t border-gray-200 bg-white rounded-b-lg">
-                        <form onSubmit={handleSendMessage} className="flex items-center">
+                        <form onSubmit={handleFormSubmit} className="flex items-center">
                             <input
                                 type="text"
                                 value={userInput}
