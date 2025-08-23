@@ -20,7 +20,7 @@ const SendIcon = () => (
 );
 
 
-const Chatbot: React.FC = () => {
+const Chatbot: React.FC<{ className?: string }> = ({ className }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
     const [userInput, setUserInput] = useState('');
@@ -85,11 +85,11 @@ const Chatbot: React.FC = () => {
     };
 
     return (
-        <>
+        <div className={`relative ${className}`}>
             {/* Chat Bubble */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-brand-gold p-4 rounded-full shadow-lg z-50 transform hover:scale-110 transition-transform duration-300"
+                className="bg-brand-gold p-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300"
                 aria-label="Toggle Chat"
             >
                 {isOpen ? <CloseIcon /> : <ChatIcon />}
@@ -97,7 +97,7 @@ const Chatbot: React.FC = () => {
 
             {/* Chat Window */}
             {isOpen && (
-                <div className="fixed bottom-20 right-4 md:bottom-24 md:right-8 w-80 md:w-96 h-[60vh] bg-white rounded-lg shadow-2xl z-50 flex flex-col">
+                <div className="absolute bottom-full right-0 w-80 md:w-96 h-[60vh] bg-white rounded-lg shadow-2xl flex flex-col mb-4">
                     {/* Header */}
                     <div className="bg-brand-navy text-white p-4 rounded-t-lg flex justify-between items-center">
                         <h3 className="font-bold text-lg">Strategic Advisor</h3>
@@ -142,7 +142,7 @@ const Chatbot: React.FC = () => {
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
