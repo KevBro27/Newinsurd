@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import Chatbot from './Chatbot';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -22,6 +23,7 @@ const Layout: React.FC = () => {
           Apply Now
         </Link>
       )}
+      <Chatbot />
     </div>
   );
 };
