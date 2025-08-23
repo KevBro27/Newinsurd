@@ -1,74 +1,55 @@
-import React, { useEffect } from 'react';
-import TrustedCarriers from '../components/TrustedCarriers';
+// src/pages/QuoteApply.tsx (or your component for /quote-and-apply)
+import { useEffect, useRef, useState } from "react";
 
-const QuoteAndApplyPage: React.FC = () => {
+export default function QuoteApply() {
+  const mountRef = useRef<HTMLDivElement | null>(null);
+  const [ready, setReady] = useState(false);
+
   useEffect(() => {
-    const newDescription = "Get instant, transparent life insurance quotes from A-rated carriers in New Jersey. Use our secure, powerful tool to analyze the market and apply in minutes.";
+    // Remove any previous instance (helps when navigating SPA routes)
+    if (mountRef.current) mountRef.current.innerHTML = '<div id="kbj-backnine-target"></div>';
 
-    document.querySelector('meta[name="description"]')?.setAttribute('content', newDescription);
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', newDescription);
-    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', newDescription);
+    // Inject BackNine script once per visit
+    const s = document.createElement("script");
+    // 👉 replace with the exact BackNine script src you were given
+    s.src = "https://cdn.quoteandapply.io/widget.js";
+    s.async = true;
 
-    // Check if the script is already on the page to avoid duplicates
-    if (document.getElementById('strife')) {
-        return;
-    }
-
-    const script = document.createElement('script');
-    script.id = 'strife';
-    script.src = 'https://cdn.quoteandapply.io/widget.js';
-    script.setAttribute('data-strife-key', 'T-RdXnhcWNMxMkZr');
-    script.setAttribute('data-strife-container-id', 'container-id');
-    script.async = true;
-
-    document.body.appendChild(script);
-
-    // Cleanup function to run when the component unmounts
-    return () => {
-      const strifeScript = document.getElementById('strife');
-      if (strifeScript) {
-        document.body.removeChild(strifeScript);
+    s.onload = () => {
+      // If BackNine exposes an init, call it. Otherwise, the script usually auto-injects into the target.
+      // @ts-ignore
+      if (window.BackNine?.init) {
+        // @ts-ignore
+        window.BackNine.init({ target: "#kbj-backnine-target" });
       }
-      const container = document.getElementById('container-id');
-      if (container) {
-          container.innerHTML = '';
-      }
+      // Force a resize shortly after mount (solves “spinner because zero-size at first paint”)
+      requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+      setReady(true);
     };
-  }, []); // Empty dependency array ensures this runs only once
+
+    s.onerror = () => setReady(true); // fail open so the page still renders
+
+    document.body.appendChild(s);
+    return () => { document.body.removeChild(s); };
+  }, []);
 
   return (
-    <div className="bg-white py-16 md:py-24">
-      <div className="container mx-auto px-6">
-        <section id="quoter" className="text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-navy">
-            Instantly Compare Quotes from <span className="text-brand-gold">A-Rated Carriers</span>
-          </h1>
-          <p className="mt-4 max-w-3xl mx-auto text-lg text-brand-body-text mb-12">
-            Use our secure, powerful tool to analyze the market and find the best rate for your New Jersey family.
-          </p>
+    <main className="px-4 py-8">
+      <div className="kbj-qa-shell max-w-5xl mx-auto rounded-2xl bg-white shadow-sm ring-1 ring-gray-100">
+        <header className="p-5 border-b">
+          <h1 className="text-xl font-semibold">Quote &amp; Apply</h1>
+          <p className="text-sm text-gray-500">Fast, simple, and secure.</p>
+        </header>
 
-          <div className="max-w-4xl mx-auto mb-12">
-            <TrustedCarriers />
-          </div>
+        {!ready && (
+          <div className="p-8 text-center text-gray-500">Loading secure quoter…</div>
+        )}
 
-          {/* --- THIS IS THE CORRECTED CONTAINER --- */}
-          <div
-            id="container-id"
-            className="max-w-4xl w-full mx-auto bg-gray-50 p-4 rounded-xl border-2 border-brand-gold transition-all duration-300 flex justify-center items-center min-h-[600px]"
-            style={{
-              boxShadow: '0 0 30px rgba(251, 191, 36, 0.2)'
-            }}
-          >
-             {/* This placeholder content will be replaced by the Strife widget once it loads. */}
-             <div className="flex flex-col items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-brand-gold"></div>
-                <p className="mt-4 text-brand-navy font-semibold">Loading secure quoter...</p>
-             </div>
-          </div>
-        </section>
+        <div ref={mountRef} className="kbj-qa-frame p-4">
+          {/* BackNine will inject an iframe inside this target */}
+          <div id="kbj-backnine-target" />
+        </div>
       </div>
-    </div>
+    </main>
   );
-};
-
-export default QuoteAndApplyPage;
+}
