@@ -15,6 +15,7 @@ import PartnersPage from './pages/PartnersPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ThankYouPage from './pages/ThankYouPage';
+import FaqPage from './pages/FaqPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="thank-you" element={<ThankYouPage />} />
+          <Route path="faqs" element={<FaqPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
