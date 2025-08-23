@@ -110,9 +110,15 @@ const FreeAuditPage: React.FC = () => {
                 </div>
               </div>
               
-              <div className="mb-6">
-                <label htmlFor="name" className="block text-brand-body-text font-semibold mb-2">Full Name</label>
-                <input type="text" id="name" name="name" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
+              <div className="grid md:grid-cols-2 md:gap-6">
+                <div className="mb-6">
+                    <label htmlFor="first_name" className="block text-brand-body-text font-semibold mb-2">First Name</label>
+                    <input type="text" id="first_name" name="first_name" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="last_name" className="block text-brand-body-text font-semibold mb-2">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
+                </div>
               </div>
 
               <div className="mb-6">
@@ -120,9 +126,39 @@ const FreeAuditPage: React.FC = () => {
                 <input type="email" id="email" name="email" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
               </div>
 
+              <div className="grid md:grid-cols-2 md:gap-6">
+                <div className="mb-6">
+                    <label htmlFor="phone" className="block text-brand-body-text font-semibold mb-2">Phone</label>
+                    <input type="tel" id="phone" name="phone" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="zip" className="block text-brand-body-text font-semibold mb-2">ZIP Code</label>
+                    <input type="text" id="zip" name="zip" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 md:gap-6">
+                <div className="mb-6">
+                    <label htmlFor="age" className="block text-brand-body-text font-semibold mb-2">Age</label>
+                    <input type="number" id="age" name="age" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="smoker" className="block text-brand-body-text font-semibold mb-2">Smoker?</label>
+                    <select id="smoker" name="smoker" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition h-[50px]">
+                        <option>No</option>
+                        <option>Yes</option>
+                    </select>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="monthly_budget" className="block text-brand-body-text font-semibold mb-2">Monthly Budget (Optional)</label>
+                <input type="text" id="monthly_budget" name="monthly_budget" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
+              </div>
+
               <div className="mb-8">
-                <label htmlFor="policy-file" className="block text-brand-body-text font-semibold mb-2">Upload Policy Document (PDF, JPG, PNG)</label>
-                 <input type="file" id="policy-file" name="policy-file" className="w-full text-sm text-brand-body-text file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-gold file:text-brand-navy hover:file:bg-brand-gold-dark" required />
+                <label htmlFor="file" className="block text-brand-body-text font-semibold mb-2">Upload Current Policy (PDF)</label>
+                 <input type="file" id="file" name="file" accept=".pdf" className="w-full text-sm text-brand-body-text file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-gold file:text-brand-navy hover:file:bg-brand-gold-dark" />
               </div>
               
               <div data-netlify-recaptcha="true" className="mb-8"></div>
