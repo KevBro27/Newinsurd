@@ -1,9 +1,0 @@
-/* keep the injected iframe neat inside the card */
-.kbj-qa-frame iframe {
-  width: 100% !important;
-  min-height: 960px !important;          /* adjust to taste */
-  height: clamp(960px, 120vh, 1400px) !important;
-  border: 0 !important;
-  display: block !important;
-}
-.kbj-qa-frame { overflow: hidden; }
