@@ -115,6 +115,20 @@ const FAQS = [
   {q:"What happens at the end of term?", a:`Coverage typically ends or renews at a higher rate. Convert before term end if you still need coverage. We’ll calendar your window.`},
   {q:"NJ‑specific considerations", a:`New Jersey follows standard contestability/suicide clause rules and consumer protections. We’ll handle forms & compliance for you.`},
   {q:"How do I start?", a:`Two easy paths: upload your current policy for a **Free Audit** → ${LINK.audit}, or jump straight to **Quote & Apply** → ${LINK.quote}.`},
+  {q:"Does New Jersey have a free look period for life insurance?", a:`Yes. In New Jersey you get at least 10 days after delivery of a new life insurance policy to review and cancel for a full refund. Some carriers extend to 20–30 days. Always check your contract.`},
+  {q:"What is the free look period?", a:`It’s a “cooling-off” window (in NJ minimum 10 days) where you can cancel your new policy and get a full premium refund. It protects buyers from rushing into a decision.`},
+  {q:"Can I cancel my NJ policy during the free look?", a:`Yes. If you’re within the free look period, just notify the insurer in writing and return the policy. You’ll get your money back, no penalty.`},
+  {q:"Are free look rights the same for annuities in NJ?", a:`Yes. NJ law gives at least 10 days (sometimes 20 for seniors) on annuities too, to review and cancel for a refund.`},
+  {q:"What happens if I find a better policy during the free look?", a:`You can accept the new one and cancel the old one within its free look window to avoid paying for both. Just be sure the new coverage is approved first to prevent gaps.`},
+  {q:"Does NJ regulate life insurance replacements?", a:`Yes. Replacements must follow disclosure rules and comparison forms. That’s why I offer a **Free Audit** before you switch: ${LINK.audit}.`},
+  {q:"Are NJ life insurance policies protected if my insurer fails?", a:`Yes. The New Jersey Life & Health Insurance Guaranty Association backs policies up to certain limits (currently $300,000 in death benefits, $100,000 in cash value).`},
+  {q:"Is there a free look for health insurance in NJ?", a:`Yes, most health policies in NJ have a 10-day free look as well, giving you time to review terms and cancel if it doesn’t meet your needs.`},
+  {q:"Does NJ have contestability rules?", a:`Yes. Like most states, NJ has a 2-year contestability period where the insurer can review misstatements if a claim is filed. After that, claims are incontestable (except for fraud).`},
+  {q:"Does NJ require grace periods?", a:`Yes. State law requires at least a 30-day grace period on individual life policies. You can still pay within that window without losing coverage.`},
+  {q:"Do NJ life insurance policies cover suicide?", a:`Most policies have a 2-year suicide exclusion period (standard nationwide). NJ follows this; after that, death by suicide is covered.`},
+  {q:"Can minors be insured in NJ?", a:`Yes. Parents/guardians can buy juvenile life insurance. NJ requires the face amount to be reasonable relative to the child’s age.`},
+  {q:"Are accelerated death benefits available in NJ?", a:`Yes. Many NJ-approved policies include accelerated benefits for terminal illness or critical illness. Ask during your **Quote & Apply**: ${LINK.quote}.`},
+  {q:"Does NJ allow viatical or life settlements?", a:`Yes, but settlements are regulated by the NJ Department of Banking & Insurance. Only licensed settlement providers can purchase policies.`},
 ];
 
 // ---------- Tiny matcher (keyword overlap + partials) ----------
