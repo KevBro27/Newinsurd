@@ -17,6 +17,8 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ThankYouPage from './pages/ThankYouPage';
 import FaqPage from './pages/FaqPage';
 import NotFoundPage from './pages/NotFoundPage';
+import HobokenProfessionals from "./pages/HobokenProfessionals";
+import PrincetonFamilies from "./pages/PrincetonFamilies";
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="free-audit" element={<FreeAuditPage />} />
           <Route path="quote-and-apply" element={<QuoteAndApplyPage />} />
+          <Route path="hoboken-professionals" element={<HobokenProfessionals />} />
+          <Route path="princeton-families" element={<PrincetonFamilies />} />
           <Route path="ethos" element={<EthosPage />} />
           <Route path="solutions" element={<SolutionsPage />} />
           <Route path="articles" element={<ArticlesPage />} />
