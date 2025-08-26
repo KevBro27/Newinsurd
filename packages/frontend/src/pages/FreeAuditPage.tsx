@@ -85,7 +85,7 @@ const FreeAuditPage: React.FC = () => {
         <div className="max-w-2xl mx-auto bg-gray-50 p-8 md:p-12 rounded-xl border-2 border-brand-gold">
             <h2 className="text-3xl font-bold text-center text-brand-navy mb-6">Get Your Free Audit Started</h2>
             <form 
-                name="policy-audit" 
+                name="free-audit"
                 method="POST" 
                 data-netlify="true" 
                 data-netlify-honeypot="bot-field" 
@@ -93,7 +93,7 @@ const FreeAuditPage: React.FC = () => {
                 action="/#/thank-you"
                 onSubmit={handleSubmit}
             >
-              <input type="hidden" name="form-name" value="policy-audit" />
+              <input type="hidden" name="form-name" value="free-audit" />
               <p className="hidden">
                 <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
               </p>
@@ -157,8 +157,8 @@ const FreeAuditPage: React.FC = () => {
               </div>
 
               <div className="mb-8">
-                <label htmlFor="file" className="block text-brand-body-text font-semibold mb-2">Upload Current Policy (PDF)</label>
-                 <input type="file" id="file" name="file" accept=".pdf" className="w-full text-sm text-brand-body-text file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-gold file:text-brand-navy hover:file:bg-brand-gold-dark" />
+                <label htmlFor="policy_pdf" className="block text-brand-body-text font-semibold mb-2">Upload Current Policy (PDF)</label>
+                 <input type="file" id="policy_pdf" name="policy_pdf" accept=".pdf" className="w-full text-sm text-brand-body-text file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-gold file:text-brand-navy hover:file:bg-brand-gold-dark" />
               </div>
               
               <div data-netlify-recaptcha="true" className="mb-8"></div>
