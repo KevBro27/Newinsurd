@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 const UploadIcon = () => (
@@ -31,7 +30,19 @@ const SpinnerIcon = () => (
 
 
 const FreeAuditPage: React.FC = () => {
+    const [formData, setFormData] = useState({
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone: '',
+        zip: '',
+        age: '',
+        smoker: 'No',
+        monthly_budget: '',
+    });
+    const [file, setFile] = useState<File | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [status, setStatus] = useState('');
 
     useEffect(() => {
         const newDescription = "Think you might be overpaying for your life insurance? Use our free, confidential audit tool to get a no-risk analysis of your current policy.";
@@ -41,10 +52,42 @@ const FreeAuditPage: React.FC = () => {
         document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', newDescription);
     }, []);
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setFile(e.target.files[0]);
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        // Netlify handles the actual submission. We just need to set the state
-        // to give the user visual feedback. We don't prevent default.
+        e.preventDefault();
         setIsSubmitting(true);
+        setStatus('Processing...');
+
+        const data = new FormData();
+        data.append('form-name', 'free-audit');
+        Object.keys(formData).forEach(key => data.append(key, formData[key as keyof typeof formData]));
+        if (file) {
+            data.append('policy_pdf', file, file.name);
+        }
+
+        fetch('/', {
+            method: 'POST',
+            body: data,
+        })
+            .then(() => {
+                setStatus('Form Submission Successful!');
+                setIsSubmitting(false);
+                window.location.href = '/#/thank-you';
+            })
+            .catch(error => {
+                setStatus('Form Submission Failed!');
+                setIsSubmitting(false);
+                alert('An error occurred. Please try again.');
+            });
     };
 
   return (
@@ -86,11 +129,7 @@ const FreeAuditPage: React.FC = () => {
             <h2 className="text-3xl font-bold text-center text-brand-navy mb-6">Get Your Free Audit Started</h2>
             <form 
                 name="free-audit"
-                method="POST" 
-                data-netlify="true" 
-                data-netlify-honeypot="bot-field" 
-                data-netlify-recaptcha="true" 
-                action="/#/thank-you"
+                method="POST"
                 onSubmit={handleSubmit}
             >
               <input type="hidden" name="form-name" value="free-audit" />
@@ -113,38 +152,38 @@ const FreeAuditPage: React.FC = () => {
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className="mb-6">
                     <label htmlFor="first_name" className="block text-brand-body-text font-semibold mb-2">First Name</label>
-                    <input type="text" id="first_name" name="first_name" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
+                    <input type="text" id="first_name" name="first_name" value={formData.first_name} onChange={handleChange} className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
                 </div>
                 <div className="mb-6">
                     <label htmlFor="last_name" className="block text-brand-body-text font-semibold mb-2">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
+                    <input type="text" id="last_name" name="last_name" value={formData.last_name} onChange={handleChange} className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
                 </div>
               </div>
 
               <div className="mb-6">
                 <label htmlFor="email" className="block text-brand-body-text font-semibold mb-2">Email Address</label>
-                <input type="email" id="email" name="email" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" required />
               </div>
 
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className="mb-6">
                     <label htmlFor="phone" className="block text-brand-body-text font-semibold mb-2">Phone</label>
-                    <input type="tel" id="phone" name="phone" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
+                    <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
                 </div>
                 <div className="mb-6">
                     <label htmlFor="zip" className="block text-brand-body-text font-semibold mb-2">ZIP Code</label>
-                    <input type="text" id="zip" name="zip" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
+                    <input type="text" id="zip" name="zip" value={formData.zip} onChange={handleChange} className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className="mb-6">
                     <label htmlFor="age" className="block text-brand-body-text font-semibold mb-2">Age</label>
-                    <input type="number" id="age" name="age" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
+                    <input type="number" id="age" name="age" value={formData.age} onChange={handleChange} className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
                 </div>
                 <div className="mb-6">
                     <label htmlFor="smoker" className="block text-brand-body-text font-semibold mb-2">Smoker?</label>
-                    <select id="smoker" name="smoker" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition h-[50px]">
+                    <select id="smoker" name="smoker" value={formData.smoker} onChange={handleChange} className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition h-[50px]">
                         <option>No</option>
                         <option>Yes</option>
                     </select>
@@ -153,12 +192,12 @@ const FreeAuditPage: React.FC = () => {
 
               <div className="mb-6">
                 <label htmlFor="monthly_budget" className="block text-brand-body-text font-semibold mb-2">Monthly Budget (Optional)</label>
-                <input type="text" id="monthly_budget" name="monthly_budget" className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
+                <input type="text" id="monthly_budget" name="monthly_budget" value={formData.monthly_budget} onChange={handleChange} className="w-full bg-white border border-gray-300 rounded-lg p-3 text-brand-navy focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition" />
               </div>
 
               <div className="mb-8">
                 <label htmlFor="policy_pdf" className="block text-brand-body-text font-semibold mb-2">Upload Current Policy (PDF)</label>
-                 <input type="file" id="policy_pdf" name="policy_pdf" accept=".pdf" className="w-full text-sm text-brand-body-text file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-gold file:text-brand-navy hover:file:bg-brand-gold-dark" />
+                 <input type="file" id="policy_pdf" name="policy_pdf" onChange={handleFileChange} accept=".pdf" className="w-full text-sm text-brand-body-text file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-gold file:text-brand-navy hover:file:bg-brand-gold-dark" />
               </div>
               
               <div data-netlify-recaptcha="true" className="mb-8"></div>
@@ -171,7 +210,7 @@ const FreeAuditPage: React.FC = () => {
                 {isSubmitting ? (
                     <>
                         <SpinnerIcon />
-                        Processing...
+                        {status}
                     </>
                 ) : (
                     'Submit for My Free Analysis'
