@@ -329,8 +329,8 @@ const MiddlesexCountyProfessionals: React.FC = () => {
           <div className="text-sm text-gray-400">
             <p className="mb-4">Kevin Brown Jr. Insurance • Licensed in New Jersey • Serving Middlesex County Professionals</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="tel:+1234567890" className="hover:text-white transition-colors">📞 (123) 456-7890</a>
-              <a href="mailto:hello@kevinbrownjr.com" className="hover:text-white transition-colors">✉️ hello@kevinbrownjr.com</a>
+              <a href="tel:908-440-1990" className="hover:text-white transition-colors">📞 908-440-1990</a>
+              <a href="mailto:kevin@kevinbrownjrinsurance.com" className="hover:text-white transition-colors">✉️ kevin@kevinbrownjrinsurance.com</a>
               <a href="https://www.linkedin.com/in/kevin-brown-jr/" target="_blank" className="hover:text-white transition-colors flex items-center">
                 <i className="fab fa-linkedin mr-2"></i>
                 Connect on LinkedIn
