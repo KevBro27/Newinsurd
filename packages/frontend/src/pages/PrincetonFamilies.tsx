@@ -12,7 +12,7 @@ const PrincetonFamilies: React.FC = () => {
   return (
     <div className="bg-gray-50">
       {/* Header */}
-      <header className="gradient-bg text-white">
+      <header className="gradient-bg-princeton text-white">
         <div className="container mx-auto px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -22,7 +22,7 @@ const PrincetonFamilies: React.FC = () => {
               Secure your family's financial future with comprehensive whole life and term life insurance from A-rated carriers. Tailored for Princeton's established families with $1M+ coverage options and estate planning expertise.
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <a href="https://apply.ethos.com/k/kevinbrown" className="cta-button text-white px-8 py-4 rounded-full text-lg font-semibold hover:text-white inline-block">
+              <a href="https://apply.ethos.com/k/kevinbrown" className="cta-button-princeton text-white px-8 py-4 rounded-full text-lg font-semibold hover:text-white inline-block">
                 <i className="fas fa-bolt mr-2"></i>Instant Decision
               </a>
               <a href="https://app.back9ins.com/apply/KevinBrown" className="bg-white text-indigo-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 inline-block">
@@ -34,14 +34,14 @@ const PrincetonFamilies: React.FC = () => {
       </header>
 
       {/* Audio Message Section */}
-      <section className="audio-section-bg py-20 text-white">
+      <section className="audio-section-bg-princeton py-20 text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="audio-player">
+            <div className="audio-player-princeton">
               <h2 className="text-3xl font-bold mb-6 text-center">A Personal Message for Princeton Families</h2>
 
               <div className="mb-6">
-                <audio controls preload="auto">
+                <audio controls preload="auto" className="audio-princeton">
                   <source src="https://cdn1.genspark.ai/user-upload-image/8/7b4397da-7da4-47c7-b62c-e330213ee48a.mp3" type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
@@ -66,7 +66,7 @@ const PrincetonFamilies: React.FC = () => {
             <p className="text-xl text-gray-600 text-center mb-16">Comprehensive protection designed for your family's unique needs</p>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="feature-card p-8 rounded-2xl shadow-lg">
+              <div className="feature-card-princeton p-8 rounded-2xl shadow-lg">
                 <div className="mb-6">
                   <i className="fas fa-shield-alt text-4xl text-indigo-600"></i>
                 </div>
@@ -74,7 +74,7 @@ const PrincetonFamilies: React.FC = () => {
                 <p className="text-gray-600 leading-relaxed">Partner exclusively with financially strong, highly-rated insurance companies to ensure your family's claims are always paid when they matter most.</p>
               </div>
 
-              <div className="feature-card p-8 rounded-2xl shadow-lg">
+              <div className="feature-card-princeton p-8 rounded-2xl shadow-lg">
                 <div className="mb-6">
                   <i className="fas fa-university text-4xl text-indigo-600"></i>
                 </div>
@@ -82,7 +82,7 @@ const PrincetonFamilies: React.FC = () => {
                 <p className="text-gray-600 leading-relaxed">Specialized in high-value policies ($1M+) with estate planning integration, perfect for Princeton's established families and business owners.</p>
               </div>
 
-              <div className="feature-card p-8 rounded-2xl shadow-lg">
+              <div className="feature-card-princeton p-8 rounded-2xl shadow-lg">
                 <div className="mb-6">
                   <i className="fas fa-mobile-alt text-4xl text-indigo-600"></i>
                 </div>
@@ -90,7 +90,7 @@ const PrincetonFamilies: React.FC = () => {
                 <p className="text-gray-600 leading-relaxed">Get quotes and apply online in minutes. No lengthy appointments or medical exams for many policies – just smart, efficient coverage.</p>
               </div>
 
-              <div className="feature-card p-8 rounded-2xl shadow-lg">
+              <div className="feature-card-princeton p-8 rounded-2xl shadow-lg">
                 <div className="mb-6">
                   <i className="fas fa-map-marker-alt text-4xl text-indigo-600"></i>
                 </div>
@@ -98,7 +98,7 @@ const PrincetonFamilies: React.FC = () => {
                 <p className="text-gray-600 leading-relaxed">Deep understanding of New Jersey estate laws, tax implications, and the unique financial needs of Princeton-area families.</p>
               </div>
 
-              <div className="feature-card p-8 rounded-2xl shadow-lg">
+              <div className="feature-card-princeton p-8 rounded-2xl shadow-lg">
                 <div className="mb-6">
                   <i className="fas fa-concierge-bell text-4xl text-indigo-600"></i>
                 </div>
@@ -106,7 +106,7 @@ const PrincetonFamilies: React.FC = () => {
                 <p className="text-gray-600 leading-relaxed">White-glove service with dedicated support throughout the process. We're here when you need us, not just when you buy.</p>
               </div>
 
-              <div className="feature-card p-8 rounded-2xl shadow-lg">
+              <div className="feature-card-princeton p-8 rounded-2xl shadow-lg">
                 <div className="mb-6">
                   <i className="fas fa-clock text-4xl text-indigo-600"></i>
                 </div>
@@ -124,7 +124,7 @@ const PrincetonFamilies: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">Trusted by Princeton Families</h2>
 
-            <div className="testimonial-card p-8 rounded-2xl shadow-lg mb-12">
+            <div className="testimonial-card-princeton p-8 rounded-2xl shadow-lg mb-12">
               <div className="flex items-center mb-6">
                 <div className="flex text-yellow-400 mb-4">
                   <i className="fas fa-star"></i>
@@ -141,15 +141,15 @@ const PrincetonFamilies: React.FC = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="trusted-badge">
+              <div className="trusted-badge-princeton">
                 <i className="fas fa-award text-3xl text-indigo-600 mb-3"></i>
                 <div className="font-semibold text-gray-900">A+ Rated Carriers</div>
               </div>
-              <div className="trusted-badge">
+              <div className="trusted-badge-princeton">
                 <i className="fas fa-certificate text-3xl text-indigo-600 mb-3"></i>
                 <div className="font-semibold text-gray-900">Licensed in New Jersey</div>
               </div>
-              <div className="trusted-badge">
+              <div className="trusted-badge-princeton">
                 <i className="fas fa-handshake text-3xl text-indigo-600 mb-3"></i>
                 <div className="font-semibold text-gray-900">FINRA Registered</div>
               </div>
@@ -167,19 +167,19 @@ const PrincetonFamilies: React.FC = () => {
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="step-number mx-auto mb-6">1</div>
+                <div className="step-number-princeton mx-auto mb-6">1</div>
                 <h3 className="text-2xl font-bold mb-4 text-gray-900">Get Your Instant Quote</h3>
                 <p className="text-gray-600 leading-relaxed">Answer a few quick questions about your family's needs and financial goals. Get personalized quotes from multiple A-rated carriers in minutes.</p>
               </div>
 
               <div className="text-center">
-                <div className="step-number mx-auto mb-6">2</div>
+                <div className="step-number-princeton mx-auto mb-6">2</div>
                 <h3 className="text-2xl font-bold mb-4 text-gray-900">Choose Your Coverage</h3>
                 <p className="text-gray-600 leading-relaxed">Review your options with expert guidance. Select the policy that best fits your estate planning needs and family protection goals.</p>
               </div>
 
               <div className="text-center">
-                <div className="step-number mx-auto mb-6">3</div>
+                <div className="step-number-princeton mx-auto mb-6">3</div>
                 <h3 className="text-2xl font-bold mb-4 text-gray-900">Secure Your Legacy</h3>
                 <p className="text-gray-600 leading-relaxed">Complete your digital application and get approved fast. Your family's financial future is protected, often within days.</p>
               </div>
@@ -189,14 +189,14 @@ const PrincetonFamilies: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="gradient-bg py-20 text-white">
+      <section className="gradient-bg-princeton py-20 text-white">
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold mb-6">Ready to Protect Your Family's Future?</h2>
             <p className="text-xl mb-8 text-blue-100">Join hundreds of Princeton families who have secured their legacy with comprehensive life insurance coverage. Get started in less than 5 minutes.</p>
 
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <a href="https://apply.ethos.com/k/kevinbrown" className="cta-button text-white px-8 py-4 rounded-full text-lg font-semibold hover:text-white inline-block">
+              <a href="https://apply.ethos.com/k/kevinbrown" className="cta-button-princeton text-white px-8 py-4 rounded-full text-lg font-semibold hover:text-white inline-block">
                 <i className="fas fa-bolt mr-2"></i>Instant Decision
               </a>
               <a href="https://app.back9ins.com/apply/KevinBrown" className="bg-white text-indigo-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 inline-block">
@@ -214,27 +214,27 @@ const PrincetonFamilies: React.FC = () => {
             <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">Frequently Asked Questions</h2>
 
             <div className="space-y-6">
-              <div className="faq-item bg-white p-6 rounded-lg shadow-sm">
+              <div className="faq-item-princeton bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-bold mb-3 text-gray-900">How much life insurance coverage do I need as a Princeton family?</h3>
                 <p className="text-gray-600 leading-relaxed">For established families in Princeton, we typically recommend 10-15 times your annual income, with a minimum of $1M coverage. This ensures your family can maintain their lifestyle, pay off mortgages, fund children's education, and handle estate taxes. Our assessment considers your specific financial situation, debts, and future goals.</p>
               </div>
 
-              <div className="faq-item bg-white p-6 rounded-lg shadow-sm">
+              <div className="faq-item-princeton bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-bold mb-3 text-gray-900">What's the difference between term life and whole life insurance?</h3>
                 <p className="text-gray-600 leading-relaxed">Term life provides temporary coverage at lower premiums, ideal for specific obligations like mortgages or until children are independent. Whole life offers permanent coverage with cash value accumulation, perfect for estate planning and wealth transfer strategies. Many Princeton families use a combination of both.</p>
               </div>
 
-              <div className="faq-item bg-white p-6 rounded-lg shadow-sm">
+              <div className="faq-item-princeton bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-bold mb-3 text-gray-900">Do I need a medical exam for high-value coverage?</h3>
                 <p className="text-gray-600 leading-relaxed">Not always. Many policies up to $1M can be approved with just health questions and digital health records review. For larger amounts ($2M+), a simplified medical exam may be required, but we make the process as convenient as possible, often at your home or office.</p>
               </div>
 
-              <div className="faq-item bg-white p-6 rounded-lg shadow-sm">
+              <div className="faq-item-princeton bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-bold mb-3 text-gray-900">How does life insurance fit into my estate planning?</h3>
                 <p className="text-gray-600 leading-relaxed">Life insurance is crucial for estate planning in New Jersey. It provides liquidity to pay estate taxes, equalizes inheritance among children, and can fund trusts. We work closely with your estate attorney and financial advisor to ensure your coverage integrates seamlessly with your overall wealth transfer strategy.</p>
               </div>
 
-              <div className="faq-item bg-white p-6 rounded-lg shadow-sm">
+              <div className="faq-item-princeton bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-bold mb-3 text-gray-900">What makes your service different from other Princeton insurance agents?</h3>
                 <p className="text-gray-600 leading-relaxed">We specialize exclusively in families and offer a unique combination of digital efficiency and personalized service. Our platform provides instant quotes from multiple A-rated carriers, while our expertise ensures you get coverage that truly fits your sophisticated financial needs.</p>
               </div>

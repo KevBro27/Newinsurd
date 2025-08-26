@@ -12,9 +12,9 @@ const HobokenProfessionals: React.FC = () => {
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
-      <section className="hero-gradient min-h-screen flex items-center">
+      <section className="hero-gradient-hoboken min-h-screen flex items-center">
         <div className="container mx-auto px-6 text-center text-white">
-          <div className="fade-in">
+          <div className="fade-in-hoboken">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Life Insurance for<br />
               <span className="text-yellow-300">Hoboken Professionals</span><br />
@@ -43,13 +43,13 @@ const HobokenProfessionals: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a href="https://app.back9ins.com/apply/KevinBrown"
-                 className="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center justify-center pulse-animation">
+                 className="btn-primary-hoboken text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center justify-center pulse-animation-hoboken">
                 <i className="fas fa-rocket mr-3"></i>
                 Get Quote & Apply Now
               </a>
 
               <a href="https://app.ethoslife.com/partner/cca97/q/goals"
-                 className="btn-secondary text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center justify-center">
+                 className="btn-secondary-hoboken text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center justify-center">
                 <i className="fas fa-clock mr-3"></i>
                 Instant Decision
               </a>
@@ -64,9 +64,9 @@ const HobokenProfessionals: React.FC = () => {
       </section>
 
       {/* Audio/Podcast Section */}
-      <section className="audio-section py-20">
+      <section className="audio-section-hoboken py-20">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto audio-player">
+          <div className="max-w-4xl mx-auto audio-player-hoboken">
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
               Why Hoboken Professionals Choose Us
               <span className="text-lg font-normal text-gray-600 block mt-2">(30 seconds)</span>
@@ -100,7 +100,7 @@ const HobokenProfessionals: React.FC = () => {
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="feature-card p-8 rounded-xl shadow-lg text-center">
+            <div className="feature-card-hoboken p-8 rounded-xl shadow-lg text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <i className="fas fa-bolt text-3xl text-blue-600"></i>
               </div>
@@ -110,7 +110,7 @@ const HobokenProfessionals: React.FC = () => {
               </p>
             </div>
 
-            <div className="feature-card p-8 rounded-xl shadow-lg text-center">
+            <div className="feature-card-hoboken p-8 rounded-xl shadow-lg text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <i className="fas fa-dollar-sign text-3xl text-green-600"></i>
               </div>
@@ -120,7 +120,7 @@ const HobokenProfessionals: React.FC = () => {
               </p>
             </div>
 
-            <div className="feature-card p-8 rounded-xl shadow-lg text-center">
+            <div className="feature-card-hoboken p-8 rounded-xl shadow-lg text-center">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <i className="fas fa-mobile-alt text-3xl text-purple-600"></i>
               </div>
@@ -130,7 +130,7 @@ const HobokenProfessionals: React.FC = () => {
               </p>
             </div>
 
-            <div className="feature-card p-8 rounded-xl shadow-lg text-center">
+            <div className="feature-card-hoboken p-8 rounded-xl shadow-lg text-center">
               <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <i className="fas fa-star text-3xl text-yellow-600"></i>
               </div>
@@ -151,7 +151,7 @@ const HobokenProfessionals: React.FC = () => {
           </h2>
 
           <div className="max-w-4xl mx-auto">
-            <div className="testimonial-card p-8 rounded-xl shadow-lg mb-12">
+            <div className="testimonial-card-hoboken p-8 rounded-xl shadow-lg mb-12">
               <div className="flex items-start">
                 <i className="fas fa-quote-left text-4xl text-blue-500 mr-6 mt-2"></i>
                 <div>
@@ -174,15 +174,15 @@ const HobokenProfessionals: React.FC = () => {
             {/* Stats */}
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div className="bg-white p-6 rounded-xl shadow-lg">
-                <div className="stats-number text-4xl font-bold mb-2">500+</div>
+                <div className="stats-number-hoboken text-4xl font-bold mb-2">500+</div>
                 <div className="text-gray-600 font-medium">Local Professionals Covered</div>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg">
-                <div className="stats-number text-4xl font-bold mb-2">2.5 min</div>
+                <div className="stats-number-hoboken text-4xl font-bold mb-2">2.5 min</div>
                 <div className="text-gray-600 font-medium">Average Application Time</div>
               </div>
               <div className="bg-white p-6 rounded-xl shadow-lg">
-                <div className="stats-number text-4xl font-bold mb-2">98%</div>
+                <div className="stats-number-hoboken text-4xl font-bold mb-2">98%</div>
                 <div className="text-gray-600 font-medium">Customer Satisfaction Rate</div>
               </div>
             </div>
@@ -226,7 +226,7 @@ const HobokenProfessionals: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="hero-gradient py-20">
+      <section className="hero-gradient-hoboken py-20">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Get Covered?</h2>
           <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
@@ -235,7 +235,7 @@ const HobokenProfessionals: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <a href="https://app.back9ins.com/apply/KevinBrown"
-               className="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center justify-center pulse-animation">
+               className="btn-primary-hoboken text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center justify-center pulse-animation-hoboken">
               <i className="fas fa-rocket mr-3"></i>
               Get Quote & Apply Now
             </a>

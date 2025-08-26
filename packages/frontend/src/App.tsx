@@ -19,6 +19,7 @@ import FaqPage from './pages/FaqPage';
 import NotFoundPage from './pages/NotFoundPage';
 import HobokenProfessionals from "./pages/HobokenProfessionals";
 import PrincetonFamilies from "./pages/PrincetonFamilies";
+import MiddlesexCountyProfessionals from "./pages/MiddlesexCountyProfessionals";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="quote-and-apply" element={<QuoteAndApplyPage />} />
           <Route path="hoboken-professionals" element={<HobokenProfessionals />} />
           <Route path="princeton-families" element={<PrincetonFamilies />} />
+          <Route path="middlesex-county-professionals" element={<MiddlesexCountyProfessionals />} />
           <Route path="ethos" element={<EthosPage />} />
           <Route path="solutions" element={<SolutionsPage />} />
           <Route path="articles" element={<ArticlesPage />} />

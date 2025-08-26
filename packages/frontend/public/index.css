@@ -3,116 +3,119 @@
 .chat-bubble a { word-break: break-all; overflow-wrap: anywhere; }
 
 body { font-family: 'Inter', sans-serif; }
-.hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-.btn-primary {
+
+/* Styles for Hoboken Page */
+.hero-gradient-hoboken { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.btn-primary-hoboken {
     background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
     transition: all 0.3s ease;
 }
-.btn-primary:hover {
+.btn-primary-hoboken:hover {
     background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
 }
-.btn-secondary {
+.btn-secondary-hoboken {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     transition: all 0.3s ease;
 }
-.btn-secondary:hover {
+.btn-secondary-hoboken:hover {
     background: linear-gradient(135deg, #059669 0%, #047857 100%);
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
 }
-.feature-card {
+.feature-card-hoboken {
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
 }
-.feature-card:hover {
+.feature-card-hoboken:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
-.stats-number {
+.stats-number-hoboken {
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-.audio-section {
+.audio-section-hoboken {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://thumbs.dreamstime.com/b/new-york-asian-business-woman-walking-to-work-lunch-bag-morning-commuting-drinking-coffee-cup-street-yellow-cabs-233727825.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
-.audio-player {
+.audio-player-hoboken {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
-.testimonial-card {
+.testimonial-card-hoboken {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     border-left: 4px solid #4f46e5;
 }
 @media (max-width: 768px) {
-    .audio-section {
+    .audio-section-hoboken {
         background-attachment: scroll;
     }
 }
-.pulse-animation {
-    animation: pulse 2s infinite;
+.pulse-animation-hoboken {
+    animation: pulse-hoboken 2s infinite;
 }
-@keyframes pulse {
+@keyframes pulse-hoboken {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
 }
-.fade-in {
-    animation: fadeIn 1s ease-in;
+.fade-in-hoboken {
+    animation: fadeIn-hoboken 1s ease-in;
 }
-@keyframes fadeIn {
+@keyframes fadeIn-hoboken {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.gradient-bg {
+/* Styles for Princeton Page */
+.gradient-bg-princeton {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
-.audio-section-bg {
+.audio-section-bg-princeton {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/d7caaaf8-e97e-4425-9952-8aeac611c830');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
-.audio-player {
+.audio-player-princeton {
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
     border-radius: 20px;
     padding: 2rem;
     backdrop-filter: blur(10px);
 }
-.cta-button {
+.cta-button-princeton {
     background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
 }
-.cta-button:hover {
+.cta-button-princeton:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
 }
-.feature-card {
+.feature-card-princeton {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
 }
-.feature-card:hover {
+.feature-card-princeton:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
-.testimonial-card {
+.testimonial-card-princeton {
     background: rgba(255, 255, 255, 0.98);
     border-left: 4px solid #4F46E5;
 }
-.step-number {
+.step-number-princeton {
     background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
     color: white;
     width: 3rem;
@@ -124,14 +127,14 @@ body { font-family: 'Inter', sans-serif; }
     font-weight: bold;
     font-size: 1.2rem;
 }
-.faq-item {
+.faq-item-princeton {
     border-bottom: 1px solid #E5E7EB;
     transition: all 0.3s ease;
 }
-.faq-item:hover {
+.faq-item-princeton:hover {
     background-color: #F9FAFB;
 }
-.stat-number {
+.stat-number-princeton {
     font-size: 3rem;
     font-weight: 700;
     background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
@@ -139,7 +142,7 @@ body { font-family: 'Inter', sans-serif; }
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-.trusted-badge {
+.trusted-badge-princeton {
     background: rgba(255, 255, 255, 0.9);
     border: 2px solid #E5E7EB;
     border-radius: 12px;
@@ -147,15 +150,57 @@ body { font-family: 'Inter', sans-serif; }
     text-align: center;
     transition: all 0.3s ease;
 }
-.trusted-badge:hover {
+.trusted-badge-princeton:hover {
     border-color: #4F46E5;
     transform: translateY(-2px);
 }
-audio {
+.audio-princeton {
     width: 100%;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.1);
 }
-audio::-webkit-media-controls-panel {
+.audio-princeton::-webkit-media-controls-panel {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Styles for Middlesex Page */
+.hero-gradient-middlesex { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%); }
+.btn-primary-middlesex {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    transition: all 0.3s ease;
+}
+.btn-primary-middlesex:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+}
+.btn-instant-middlesex {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    transition: all 0.3s ease;
+}
+.btn-instant-middlesex:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+.card-hover-middlesex:hover { transform: translateY(-5px); }
+.pulse-glow-middlesex { animation: pulse-glow-middlesex 2s infinite; }
+@keyframes pulse-glow-middlesex {
+    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+}
+.trust-badge-middlesex { background: rgba(255, 255, 255, 0.1); }
+.audio-section-middlesex {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.audio-player-middlesex {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 768px) {
+    .audio-section-middlesex { background-attachment: scroll; }
 }
