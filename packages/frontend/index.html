@@ -67,16 +67,19 @@
   </head>
 
   <body class="bg-white text-brand-body-text">
-    <!-- Netlify Form Blueprints - Hidden from users, for the build process only -->
-    <form name="policy-audit" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
+    <!-- Hidden shadow form for Netlify detection -->
+    <form name="free-audit" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+      <input type="text" name="first_name" />
+      <input type="text" name="last_name" />
       <input type="email" name="email" />
-      <input type="file" name="file" />
-      <input name="bot-field" />
+      <input type="text" name="phone" />
+      <input type="file" name="policy_pdf" />
+      <input type="text" name="bot-field" />
     </form>
 
     <form name="budget-tool" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
+      <input type="text" name="first_name" />
+      <input type="text" name="last_name" />
       <input type="email" name="email" />
       <input type="text" name="age" />
       <input type="text" name="gender" />
