@@ -1,9 +1,35 @@
-
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+
+declare global {
+  interface Window {
+    gtag?: (type: 'event', eventName: string, eventParams: object) => void;
+  }
+}
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // We are using gtag directly to preserve the single-page application (SPA) navigation experience.
+  // The gtag_report_conversion function uses window.location, which causes a full page reload.
+  const handleTrackedNavigation = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17509882211/co-LCIKIu44bEOOyrp1B',
+        'value': 1.0,
+        'currency': 'USD',
+        'event_callback': () => {
+          navigate(path);
+          setIsOpen(false);
+        }
+      });
+    } else {
+      navigate(path);
+      setIsOpen(false);
+    }
+  };
 
   const activeLinkStyle = {
     color: '#FBBF24',
@@ -16,7 +42,7 @@ const Header: React.FC = () => {
         to="/solutions"
         className="block md:inline-block text-brand-navy hover:text-brand-gold transition-colors duration-300 font-semibold py-2 md:py-0"
         style={({ isActive }) => isActive ? activeLinkStyle : {}}
-        onClick={() => setIsOpen(false)}
+        onClick={(e) => handleTrackedNavigation(e, '/solutions')}
       >
         Solutions
       </NavLink>
@@ -40,7 +66,7 @@ const Header: React.FC = () => {
         to="/free-audit"
         className="block md:inline-block text-brand-navy hover:text-brand-gold transition-colors duration-300 font-semibold py-2 md:py-0"
         style={({ isActive }) => isActive ? activeLinkStyle : {}}
-        onClick={() => setIsOpen(false)}
+        onClick={(e) => handleTrackedNavigation(e, '/free-audit')}
       >
         Free Policy Audit
       </NavLink>
@@ -48,7 +74,7 @@ const Header: React.FC = () => {
         to="/quote-and-apply"
         className="block md:inline-block text-brand-navy hover:text-brand-gold transition-colors duration-300 font-semibold py-2 md:py-0"
         style={({ isActive }) => isActive ? activeLinkStyle : {}}
-        onClick={() => setIsOpen(false)}
+        onClick={(e) => handleTrackedNavigation(e, '/quote-and-apply')}
       >
         Quote & Apply
       </NavLink>

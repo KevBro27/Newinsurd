@@ -1,7 +1,11 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+declare global {
+  interface Window {
+    gtag?: (type: 'event', eventName: string, eventParams: object) => void;
+  }
+}
 
 interface DiagnosticModalProps {
   isOpen: boolean;
@@ -22,9 +26,22 @@ const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ isOpen, onClose }) =>
     return null;
   }
 
+  // We are using gtag directly to preserve the single-page application (SPA) navigation experience.
+  // The gtag_report_conversion function uses window.location, which causes a full page reload.
   const handleHavePolicy = () => {
     onClose();
-    navigate('/free-audit');
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17509882211/co-LCIKIu44bEOOyrp1B',
+        'value': 1.0,
+        'currency': 'USD',
+        'event_callback': () => {
+          navigate('/free-audit');
+        }
+      });
+    } else {
+      navigate('/free-audit');
+    }
   };
 
   const handleNeedPolicy = () => {
@@ -33,12 +50,34 @@ const DiagnosticModal: React.FC<DiagnosticModalProps> = ({ isOpen, onClose }) =>
 
   const handleSeeFullCoverage = () => {
     onClose();
-    navigate('/quote-and-apply');
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17509882211/co-LCIKIu44bEOOyrp1B',
+        'value': 1.0,
+        'currency': 'USD',
+        'event_callback': () => {
+          navigate('/quote-and-apply');
+        }
+      });
+    } else {
+      navigate('/quote-and-apply');
+    }
   };
   
   const handleFitBudget = () => {
     onClose();
-    navigate('/solutions', { state: { scrollTo: '#budget-tool' } });
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17509882211/co-LCIKIu44bEOOyrp1B',
+        'value': 1.0,
+        'currency': 'USD',
+        'event_callback': () => {
+          navigate('/solutions', { state: { scrollTo: '#budget-tool' } });
+        }
+      });
+    } else {
+      navigate('/solutions', { state: { scrollTo: '#budget-tool' } });
+    }
   };
 
 
