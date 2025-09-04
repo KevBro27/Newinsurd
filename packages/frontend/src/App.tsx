@@ -20,6 +20,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import HobokenProfessionals from "./pages/HobokenProfessionals";
 import PrincetonFamilies from "./pages/PrincetonFamilies";
 import MiddlesexCountyProfessionals from "./pages/MiddlesexCountyProfessionals";
+import CrmPage from './pages/CrmPage';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
     <HashRouter>
       <ScrollToTop />
       <Routes>
+        <Route path="/crm" element={<CrmPage />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="free-audit" element={<FreeAuditPage />} />
